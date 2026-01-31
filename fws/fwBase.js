@@ -3,10 +3,13 @@
  * Download static source server
  *
  */
-
 const INJECTED_SCRIPT_ID = "injectedScript";
 let FW_ID_INCREASE = Date.now();
 let COMPONENT_PAGE = null;
+let INTERNAL_DOMAN = "";
+if (DOMAN) {
+  INTERNAL_DOMAN = DOMAN;
+}
 
 function fwWaitForElement(selector, timeout) {
   timeout = timeout || 5000;
@@ -32,7 +35,7 @@ function fwWaitForElement(selector, timeout) {
  */
 fwImport = (jsSource) => {
   const xhr = new XMLHttpRequest();
-  xhr.open("GET", jsSource, true);
+  xhr.open("GET", INTERNAL_DOMAN + jsSource, true);
 
   const scriptId = [...jsSource]
     .map((c) => {
@@ -86,7 +89,7 @@ fwImports = (jsSources) => {
     }
 
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", jsSources[index], true);
+    xhr.open("GET", INTERNAL_DOMAN + jsSources[index], true);
 
     xhr.onload = function () {
       if (xhr.status === 200) {
