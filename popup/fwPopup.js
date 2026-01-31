@@ -18,7 +18,7 @@ class FwPopup {
             <div class="popup-form">
                 <div class="popup-title">${this.title}</div>
                 <div class="popup-des">${this.description}</div>
-                <div style="">
+                <div style="display: flex;justify-content: end;gap: 10px;">
                     <button class="button-primary" onclick="(function(){${onAccept}})()">${this.hasCancel?"Accept":"Ok"}</button>
                     ${this.hasCancel?`<button class="button-secondary" onclick="(function(){FwPopup.remove('${this.id}')})()">Cancel</button>`:""}
                 </div>

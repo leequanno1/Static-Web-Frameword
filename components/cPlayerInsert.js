@@ -4,8 +4,7 @@ const CPlayerInsert = {
 
     onInput(event) {
         let input = event.target;
-        CPlayer.playerName = input.value;
-        console.log(CPlayer.playerName);
+        this.playerName = input.value;
     },
 
     setPlayerName(playerName){
@@ -16,15 +15,15 @@ const CPlayerInsert = {
     addPlayer() {
         // TODO: construct new player with ID
         // add to player list in PAGE_STATE
+        PAGE_STATE.players.push(new EPlayer(fwGenerateId(PLAYER_ID_H), this.playerName.trim()));
+        PAGE_STATE.domReloadPlayes();
         this.setPlayerName("");
         fwBoxInvisible("insertPlayerContainer");
-        console.log("Player added");
     },
 
     cancelAddPlayer() {
         this.setPlayerName("");
         fwBoxInvisible("insertPlayerContainer");
-        console.log("Add cancel");
     },
 
     render() {

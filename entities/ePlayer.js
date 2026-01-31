@@ -1,11 +1,11 @@
 // import "../fws/entitybase/eEntityBase"
 class EPlayer extends EEntityBase{
     
-    constructor(id, name) {
+    constructor(id, name, time = new Date()) {
         super();
         this.id = id
         this.name = name;
-        this.time = new Date();
+        this.time = time
         this.money = 0;
     }
 

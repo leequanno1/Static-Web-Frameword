@@ -4,11 +4,7 @@ const LOG_ID_H = "LID";
 
 const PAGE_STATE = {
 
-    players : [
-        new EPlayer(fwGenerateId(PLAYER_ID_H), "Player1"),
-        new EPlayer(fwGenerateId(PLAYER_ID_H), "Player2"),
-        new EPlayer(fwGenerateId(PLAYER_ID_H), "Player3"),
-    ],
+    players : [],
     
     slectedIds : [],
 
@@ -29,12 +25,30 @@ const PAGE_STATE = {
     },
 
     removePlayer() {
-        let popup = new FwPopup("Delete player?", "bala", true);
-        popup.show("PAGE_STATE.doRemovePlayer()"); 
+        if (!this.slectedIds.length) {
+            this.domReloadSelectPlayers();
+            fwBoxInvisible("playerContainer");
+            fwBoxInvisible("btnOpenAddNew");
+            fwBoxInvisible("insertPlayerContainer");
+            fwBoxVisible("selectPlayerContainer");
+            fwBoxVisible("btnDeleteSlt");
+            CPlayerInsert.setPlayerName("");
+        } else {
+            let popup = PU_DELETE_PLAYER;
+            popup.show(`PAGE_STATE.doRemovePlayer('${popup.id}')`); 
+        }
     },
 
-    doRemovePlayer() {
-        alert("Niga");
+    doRemovePlayer(popupId) {
+        // remove from player list and select list
+        this.players = this.players.filter(player => !this.slectedIds.includes(player.id));
+        this.slectedIds = [];
+        this.domReloadPlayes();
+        // dom UI
+        fwBoxInvisible("selectPlayerContainer");
+        fwBoxVisible("btnOpenAddNew");
+        fwBoxVisible("playerContainer");
+        FwPopup.remove(popupId);
     },
 
     /**
@@ -53,26 +67,103 @@ const PAGE_STATE = {
         this.slectedIds = this.slectedIds.filter(item => item !== id);
         if (this.slectedIds.length === 0) {
             fwBoxInvisible("selectPlayerContainer");
-            fwBoxInvisible("btnDeleteSlt");
             fwBoxVisible("btnOpenAddNew");
             fwBoxVisible("playerContainer");
         }
     },
+    
+    renderNewGameAction() {
+        document.getElementById()
+    },
+
+    renderNGConfirmAction() {
+        // dom confirm actions
+        document.getElementById("actionDoomSession").innerHTML = `
+            <button onclick="PAGE_STATE.onNewGameCancelClick()" class="btn-secondary">Cancel</button>
+            <button onclick="PAGE_STATE.onEndGameClick()" class="btn-primary">End round</button>
+        `; 
+    },
+
+    onNewGameClick() {
+        // DOM prepare
+        for (player of this.players) {
+            CPlayer.domPrepare(player.id);
+        }
+        // hide add player button
+        fwBoxInvisible("btnOpenAddNew");
+        // reder confirm actions
+        this.renderNGConfirmAction();
+    },
+
+    onNewGameCancelClick() {
+        // DOM preset players
+        for (player of this.players) {
+            CPlayer.domReset(player.id);
+        }
+        // show button add player
+        fwBoxVisible("btnOpenAddNew");
+        // DOM new game button
+        document.getElementById("actionDoomSession").innerHTML = `
+            <button class="btn-primary" onclick="PAGE_STATE.onNewGameClick()">New game</button>
+        `;
+    },
+
+    onEndGameClick() {
+        // open confirm popup
+        let popup = PU_ENDMATCH_CONFIRM;
+        popup.show(`PAGE_STATE.onEndGameConfirmClick('${popup.id}')`);
+    },
+
+    /**
+     * 
+     * @param {String} popupId 
+     */
+    onEndGameConfirmClick(popupId) {
+        // get total score dealer will be add
+        let totalAddScore = 0;
+        let matchRes = 0;
+        // cacl total add score
+        for (player of this.players) {
+            matchRes = CPlayer.getMatchResult(player.id);
+            totalAddScore += (-1) * matchRes;
+            player.money += matchRes;
+        }
+        // update dealer money
+        CDealder.addMoney(totalAddScore);
+        // DOM player record data
+        for (player of this.players) {
+            CPlayer.domUpdate(player.id);
+        }
+        // show button add player
+        fwBoxVisible("btnOpenAddNew");
+        // DOM new game button
+        document.getElementById("actionDoomSession").innerHTML = `
+            <button class="btn-primary" onclick="PAGE_STATE.onNewGameClick()">New game</button>
+        `;
+        FwPopup.remove(popupId);
+    },
+
+    // DOM SESSION
+    domReloadPlayes() {
+        // rerender from from players array
+        let reloadedContent = this.players.map(player => CPlayer.render(player)).join(" ");
+        document.getElementById("playerContainer").innerHTML = reloadedContent;
+        this.domTotalPlayers();
+    },
+
+    domReloadSelectPlayers() {
+        // rerender from from players array
+        let reloadedContent = this.players.map(player => CPlayerSelect.render(player)).join(" ");
+        document.getElementById("selectPlayerContainer").innerHTML = reloadedContent;
+        this.domTotalPlayers();
+    },
+
+    domTotalPlayers(){
+        document.getElementById("playerTotal").innerHTML = this.players.length;
+    },
 }
 
 const PMain = {
-
-    onAfterInit() {
-        const el = document.getElementById("playerContainer");
-        fwAddLongPress(el, ()=> {
-            fwBoxInvisible("playerContainer");
-            fwBoxInvisible("btnOpenAddNew");
-            fwBoxInvisible("insertPlayerContainer");
-            fwBoxVisible("selectPlayerContainer");
-            fwBoxVisible("btnDeleteSlt");
-            CPlayerInsert.setPlayerName("");
-        });
-    },
 
     /**
      * 
@@ -95,7 +186,7 @@ const PMain = {
                 Total player(<span id="playerTotal">${PAGE_STATE.players.length}</span>)
                 <div style="display: inline-block; flex: 1"></div>
                 <button id="btnOpenAddNew" class="add-new-button" onclick="fwBoxVisible('insertPlayerContainer')">+</button>
-                <button id="btnDeleteSlt" class="add-new-button display-none" onclick="PAGE_STATE.removePlayer()">🗑</button>
+                <button id="btnDeleteSlt" class="add-new-button" onclick="PAGE_STATE.removePlayer()">🗑</button>
             </div>
 
             <!-- player item input -->
@@ -111,6 +202,10 @@ const PMain = {
             <!-- player items -->
             <div id="selectPlayerContainer" class="display-none dont-select">
                 ${PAGE_STATE.players.map(ply => CPlayerSelect.render(ply)).join("")}
+            </div>
+            
+            <div class="game-action-session" id="actionDoomSession">
+                <button class="btn-primary" onclick="PAGE_STATE.onNewGameClick()">New game</button>
             </div>
         `;
     }
