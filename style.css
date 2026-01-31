@@ -1,0 +1,139 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+:root {
+  --dealer-bg: #bcc1ca;
+  --player-bg: #99d09e;
+  --ng-money-color: #ff0000;
+  --ps-money-color: #007aff;
+  --black: black;
+  --white: white;
+  --grey: grey;
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+
+  .money {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+    padding: 5px;
+    border-radius: 5px;
+    display: inline-block;
+    min-width: 70px;
+    text-align: right;
+  }
+
+  .dealer-container {
+    background: var(--dealer-bg);
+    padding: 10px 8px;
+  }
+
+  .player-item {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin: 5px;
+    background-color: var(--player-bg);
+    border-radius: 5px;
+    padding: 6px 8px;
+  }
+
+  .player-item > div {
+    flex: 1;
+  }
+
+  .player-item .player-name {
+  }
+
+  .player-item .action-zone {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+  }
+
+  .player-item .money-zone {
+    display: flex;
+    justify-content: center;
+  }
+
+  .player-item .action-zone .input-money {
+    width: 45px;
+    margin: 0 5px;
+    text-align: center;
+    padding-block: 8px;
+    border-radius: 5px;
+    border: 2px solid var(--black);
+  }
+
+  .btn-action {
+    padding: 3px 6px;
+    font-size: 12px;
+    width: 25px;
+    height: 25px;
+    border-radius: 3px;
+    border: 1px solid var(--black);
+    text-align: center;
+    font-weight: 600;
+    background-color: var(--white);
+  }
+
+  .add-new-button {
+    height: 25px;
+    width: 25px;
+    font-size: 18px;
+    background: none;
+    border: none;
+  }
+
+  .insertable .player-name-input {
+    margin-left: 5px;
+    font-size: 16px;
+    padding-inline: 3px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--black);
+    outline: none;
+  }
+}
+
+.ng-money {
+  background: var(--ng-money-color);
+}
+
+.ps-money {
+  background: var(--ps-money-color);
+}
+
+.display-none {
+  display: none;
+}
+
+.dont-select {
+  user-select: none;
+}
+
+.overlay {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  place-items: center;
+  top: 0;
+  left: 0;
+}
+
+.popup-form {
+  width: 200px;
+  padding: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  overflow: hidden;
+  border-radius: 5px;
+}

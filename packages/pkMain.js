@@ -1,0 +1,9 @@
+fwImports([
+    "/entities/ePlayer.js",
+    "/entities/ePlayerMng.js",
+    "/components/cDealer.js",
+    "/components/cPlayerInsert.js",
+    "/components/cPlayer.js",
+    "/components/cPlayerSelect.js",
+    "/components/pMain.js",
+]);
