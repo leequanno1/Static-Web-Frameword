@@ -8,7 +8,7 @@ class FwPopup {
 
     /**
      * 
-     * @param {string} onAccept action name alias 
+     * @param {String} onAccept action name alias 
      */
     show(onAccept) {
         const div = document.createElement("div");

@@ -1,4 +1,3 @@
-// import "../fws/entitybase/eEntityBase"
 class EPlayer extends EEntityBase{
     
     constructor(id, name, time = new Date()) {

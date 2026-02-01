@@ -161,6 +161,7 @@
   border: none;
   outline: none;
   border-radius: 3px;
+  min-width: 50px;
 }
 
 .popup-form .button-primary {

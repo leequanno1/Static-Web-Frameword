@@ -139,7 +139,7 @@ const CPlayer = {
                     name="playerMondyInput_$id"
                     id="${this.CONST_MONEY_POINT}${_player.id}"
                     class="input-money"
-                    value="${_player.money}"
+                    value="0"
                 />
                 <input id="${this.CONST_HIDDEN_INPUT_MATCH_RES}${_player.id}" value="0" type="hidden"/>
                 <button id="${this.CONST_BTN_PLUS}${_player.id}" disabled class="btn-action" onclick="CPlayer.plusMN('${_player.id}')">

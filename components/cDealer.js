@@ -21,7 +21,7 @@ const CDealder = {
     return `
             <div class="dealer-container">
                 <span style="font-weight: 600; font-size: 18px">Dealer</span>
-                <span class="money ps-money" id="dealerMoneyWrapper" style="margin-left: 25px"
+                <span class="money ${this.dealerMoney < 0 ? "ng-money" : "ps-money"}" id="dealerMoneyWrapper" style="margin-left: 50px"
                     ><span id="dealerMoney">${this.dealerMoney}</span> $
                 </span>
             </div>

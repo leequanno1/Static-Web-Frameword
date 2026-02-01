@@ -9,13 +9,14 @@ const CPlayerSelect = {
      * @param {Date} time 
      */
     timeConverter(time) {
+        const _time = new Date(time);
         const pad = (n) => String(n).padStart(2, "0");
 
-        const dd = pad(time.getDate());
-        const MM = pad(time.getMonth() + 1);
-        const yy = String(time.getFullYear()).slice(-2);
-        const hh = pad(time.getHours());
-        const mm = pad(time.getMinutes());
+        const dd = pad(_time.getDate());
+        const MM = pad(_time.getMonth() + 1);
+        const yy = String(_time.getFullYear()).slice(-2);
+        const hh = pad(_time.getHours());
+        const mm = pad(_time.getMinutes());
 
         return `${dd}/${MM}/${yy} ${hh}:${mm}`;
     },
