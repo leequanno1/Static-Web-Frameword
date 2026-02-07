@@ -135,7 +135,7 @@ const CPlayer = {
                     -
                 </button>
                 <input
-                    type="text"
+                    type="number"
                     name="playerMondyInput_$id"
                     id="${this.CONST_MONEY_POINT}${_player.id}"
                     class="input-money"

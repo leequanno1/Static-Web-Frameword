@@ -1,7 +1,6 @@
 fwImports([
     "/entities/ePlayer.js",
     "/entities/eHistoryLog.js",
-    "/entities/ePlayerMng.js",
     "/components/cDealer.js",
     "/components/cPlayerInsert.js",
     "/components/cPlayer.js",

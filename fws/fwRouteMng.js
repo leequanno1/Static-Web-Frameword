@@ -58,6 +58,14 @@ const setPackage = (package) => {
 }
 
 /**
+ * Get redirect path with route data
+ * @returns redirect path
+ */
+const getRedirectLink = (routePath) => {
+    return `${DOMAN}?${FW_ROUTE_MNG_CONST.LAYOUT_PATH_PARAM_KEY}=${routePath}`;
+}
+
+/**
  * Setter for page error
  * @param {string} error 
  */
@@ -133,6 +141,9 @@ const initPageRenderInfo = () => {
             setPageError("404: ERROR PAGE NOT FOUND");
         }
     }
+    if (getPageError()) {
+        renderPage(null);
+    }
 } 
 
 const loadPage = () => {
@@ -149,9 +160,9 @@ const renderPage = (component) => {
     // const injectHtml = getPageError()? getPageError(): getPackage().render();
 
     // document.getElementById(getDOOM_ID()).innerHTML = injectHtml;
-
     if (getPageError()) {
         document.getElementById(getDOOM_ID()).innerHTML = getPageError();
+        return;
     } else {
         // const cssList = getPackage().getCss();
         // for(let css of cssList) {

@@ -21,9 +21,10 @@ const CDealder = {
     return `
             <div class="dealer-container">
                 <span style="font-weight: 600; font-size: 18px">Dealer</span>
-                <span class="money ${this.dealerMoney < 0 ? "ng-money" : "ps-money"}" id="dealerMoneyWrapper" style="margin-left: 50px"
+                <div style="text-align: center;"><span class="money ${this.dealerMoney < 0 ? "ng-money" : "ps-money"}" id="dealerMoneyWrapper"
                     ><span id="dealerMoney">${this.dealerMoney}</span> $
-                </span>
+                </span></div>
+                <div style="display: flex;align-items: center;justify-content: end;"><a href="${getRedirectLink("/show_log")}" title="View log"><i class="fa-solid fa-timeline"></i></a></div>
             </div>
         `;
   },

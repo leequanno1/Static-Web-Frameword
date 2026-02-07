@@ -52,8 +52,8 @@ class EHistoryLog extends EEntityBase {
 
     static fcMatchResultLog(dealerMoney, playerInfs) {
         return new EHistoryLog(
-            fwGenerateId(this.LOG_MATCH_RESULT), 
-            this.LOG_ADD_PLAYER, 
+            fwGenerateId(LOG_ID_H), 
+            this.LOG_MATCH_RESULT, 
             {
                 dealerMoney: dealerMoney,
                 players: playerInfs.map(pl => {
