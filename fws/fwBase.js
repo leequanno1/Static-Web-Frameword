@@ -7,9 +7,6 @@ const INJECTED_SCRIPT_ID = "injectedScript";
 let FW_ID_INCREASE = Date.now();
 let COMPONENT_PAGE = null;
 let INTERNAL_DOMAN = "";
-if (DOMAN) {
-  INTERNAL_DOMAN = DOMAN;
-}
 
 function fwWaitForElement(selector, timeout) {
   timeout = timeout || 5000;
