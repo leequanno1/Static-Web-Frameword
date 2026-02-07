@@ -1,4 +1,4 @@
 fwImports([
-    "/entities/eHistoryLog.js",
-    "/components/pLogView.js",
+    "entities/eHistoryLog.js",
+    "components/pLogView.js",
 ]);
