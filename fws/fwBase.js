@@ -142,4 +142,13 @@ const fwAddLongPress = (el, callback, delay = 500) => {
   el.addEventListener("pointerup", () => clearTimeout(timer));
   el.addEventListener("pointercancel", () => clearTimeout(timer));
   el.addEventListener("pointermove", () => clearTimeout(timer));
-}
+};
+
+const fwTimeFormat = (isoDate) => {
+  const d = new Date(isoDate);
+
+  const format =
+    `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, "0")}/${String(d.getDate()).padStart(2, "0")} ` +
+    `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}:${String(d.getSeconds()).padStart(2, "0")}`;
+  return format;
+};

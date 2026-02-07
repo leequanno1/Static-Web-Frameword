@@ -9,7 +9,7 @@ const PLogView = {
       <div class="log-item add-log">
         <div class="title-wrapper">
           <span class="log-title add-title">ADD</span>
-          <span class="log-time">${historyLog.time}</span>
+          <span class="log-time">${fwTimeFormat(historyLog.time)}</span>
           <button class="expand" onclick="PLogView.onToggleClick(event)"><i class="fa-solid fa-angle-down"></i></button>
         </div>
         <div class="log-des add-des">
@@ -24,7 +24,7 @@ const PLogView = {
       <div class="log-item add-log">
         <div class="title-wrapper">
           <span class="log-title delete-title">DELETE</span>
-          <span class="log-time">${historyLog.time}</span>
+          <span class="log-time">${fwTimeFormat(historyLog.time)}</span>
           <button class="expand" onclick="PLogView.onToggleClick(event)"><i class="fa-solid fa-angle-down"></i></button>
         </div>
         <div class="log-des del-des">
@@ -39,19 +39,19 @@ const PLogView = {
       <div class="log-item add-log">
         <div class="title-wrapper">
           <span class="log-title res-title">MATCH RESULT</span>
-          <span class="log-time">${historyLog.time}</span>
+          <span class="log-time">${fwTimeFormat(historyLog.time)}</span>
           <button class="expand" onclick="PLogView.onToggleClick(event)"><i class="fa-solid fa-angle-down"></i></button>
         </div>
         <div class="log-des res-des">
           <div class="item-row dealer">
             <span class="name">Dealer</span>
-            <span class="money">${historyLog.data.dealerMoney}</span>
+            <span class="money">${historyLog.data.dealerMoney} $</span>
           </div>
           ${historyLog.data.players.map(_player => {
             return `
               <div class="item-row player">
                 <span class="name">${_player.name}</span>
-                <span class="money">${_player.money}</span>
+                <span class="money">${_player.money} $</span>
               </div>
             `;
           }).join("")}
@@ -81,6 +81,16 @@ const PLogView = {
     }).join(" ");
   },
 
+  showClearStoratePopup() {
+    let popup = PU_CLEAR_STORATE_CONFIRM;
+    popup.show("PLogView.clearData()")
+  },
+
+  clearData() {
+    fwClearStorateData();
+    location.reload(true);
+  },
+
   /**
    *
    * @param {EPlayer} player
@@ -95,22 +105,14 @@ const PLogView = {
     }
 
     return `
+          <div><h1 style="margin: 10px;">Logs view</h1></div>
           <div class="log-list-container" style="margin-bottom: 40px;">
             ${this.fcLogComponent(this.logs)}
           </div>
-          <a style="
-              position: absolute;
-              bottom: 10px;
-              left: 10px;
-              right: 10px;
-              height: 30px;
-              display: grid;
-              place-items: center;
-              background: var(--ps-money-color);
-              color: var(--white);
-              border-radius: 5px;
-              text-decoration: none;
-          " href="${getRedirectLink("/")}" title="View log">Go back</a>
+          <div class="log-action">
+            <a href="${getRedirectLink("/")}">Go back</a>
+            <button onclick="PLogView.showClearStoratePopup()">Clear data</button>
+          </div>
         `;
   },
 };

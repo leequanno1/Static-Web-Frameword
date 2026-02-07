@@ -179,7 +179,7 @@
   margin-bottom: 10px;
 }
 
-.popup-form .button-primary, 
+.popup-form .button-primary,
 .popup-form .button-secondary {
   padding: 3px 5px;
   color: var(--white);
@@ -368,4 +368,38 @@
 /* Player */
 .item-row.player .money {
   color: #27ae60;
+}
+
+.log-action {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  text-decoration: none;
+  gap: 10px;
+}
+
+.log-action > * {
+  flex: 1;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 5px;
+}
+
+.log-action > a {
+  background: var(--ps-money-color);
+  color: var(--white);
+  text-decoration: none;
+}
+
+.log-action > button {
+  background: #c0392b;
+  color: var(--white);
 }

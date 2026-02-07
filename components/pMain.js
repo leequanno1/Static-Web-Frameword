@@ -253,8 +253,9 @@ const PMain = {
             >
                 Total player(<span id="playerTotal">${PAGE_STATE.players.length}</span>)
                 <div style="display: inline-block; flex: 1"></div>
-                <button id="btnOpenAddNew" class="add-new-button" onclick="PAGE_STATE.openInsertBox()">+</button>
-                <button id="btnDeleteSlt" class="add-new-button" onclick="PAGE_STATE.removePlayer()">🗑</button>
+                <button id="btnOpenAddNew" class="add-new-button" onclick="PAGE_STATE.openInsertBox()"><i class="fa-solid fa-plus"></i></button>
+                <span style="width:10px"></span>
+                <button id="btnDeleteSlt" class="add-new-button" onclick="PAGE_STATE.removePlayer()"><i class="fa-regular fa-trash-can"></i></button>
             </div>
 
             <!-- player item input -->
