@@ -62,7 +62,8 @@ const setPackage = (package) => {
  * @returns redirect path
  */
 const getRedirectLink = (routePath) => {
-    return `${DOMAN}?${FW_ROUTE_MNG_CONST.LAYOUT_PATH_PARAM_KEY}=${routePath}`;
+    // return `${DOMAN}?${FW_ROUTE_MNG_CONST.LAYOUT_PATH_PARAM_KEY}=${routePath}`;
+    return `?${FW_ROUTE_MNG_CONST.LAYOUT_PATH_PARAM_KEY}=${routePath}`;
 }
 
 /**
